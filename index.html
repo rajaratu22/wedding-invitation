@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0d0c0b">
+  <title>The Wedding of Tirmidzi &amp; Aisyah</title>
+  <meta name="description" content="Undangan pernikahan digital.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Partikel emas halus -->
+  <canvas id="particles" aria-hidden="true"></canvas>
+
+  <!-- ============ OPENING SCREEN ============ -->
+  <div id="cover" class="cover" role="dialog" aria-label="Pembuka undangan">
+    <div class="photo bg-fill kb" data-photo="cover"><img alt="Foto pengantin"></div>
+    <div class="overlay overlay--cover"></div>
+
+    <div class="cover-inner">
+      <p class="kicker">THE WEDDING OF</p>
+      <div class="cover-names">
+        <span data-bind="groom"></span>
+        <em>&amp;</em>
+        <span data-bind="bride"></span>
+      </div>
+      <p class="cover-date" data-bind="dateDots"></p>
+
+      <div class="guest" id="guest" hidden>
+        <span>Kepada Yth.</span>
+        <strong id="guest-name"></strong>
+      </div>
+
+      <div class="guest-editor" id="guest-editor">
+        <label for="guest-name-input">Nama tamu undangan</label>
+        <input id="guest-name-input" type="text" maxlength="60" autocomplete="off" placeholder="Contoh: Bapak Ahmad">
+        <button class="btn btn--solid" id="copy-invite-link" type="button">SALIN LINK UNDANGAN</button>
+      </div>
+
+      <button class="btn btn--solid" id="open-btn" type="button">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+        BUKA UNDANGAN
+      </button>
+    </div>
+
+    <p class="scroll-hint">Scroll to explore our story</p>
+  </div>
+
+  <main id="main">
+
+    <!-- ============ HERO ============ -->
+    <section id="home" class="hero" data-nav="home">
+      <div class="photo pbg kb" data-photo="hero" data-parallax="0.12"><img alt="Tirmidzi dan Aisyah"></div>
+      <div class="overlay overlay--hero"></div>
+
+      <div class="hero-inner">
+        <h1 class="hero-names split">
+          <span class="line"><span data-bind="groom"></span></span>
+          <span class="line amp"><span>&amp;</span></span>
+          <span class="line"><span data-bind="bride"></span></span>
+        </h1>
+        <p class="hero-date reveal" data-bind="dateUpper"></p>
+      </div>
+
+      <p class="scroll-hint">Scroll to explore our story</p>
+    </section>
+
+    <!-- ============ COUPLE ============ -->
+    <section id="couple" class="sec sec--light" data-nav="couple">
+      <div class="container">
+        <header class="sec-head reveal">
+          <h2>THE COUPLE</h2>
+          <div class="ornament"></div>
+          <p class="lead" data-bind="introText"></p>
+        </header>
+
+        <article class="person person--groom">
+          <figure class="portrait img-reveal">
+            <div class="photo" data-photo="groom"><img alt="Tirmidzi"></div>
+          </figure>
+          <div class="person-info reveal">
+            <p class="role">The Groom</p>
+            <h3 data-bind="groom"></h3>
+            <p class="parents">Putra dari<br><b data-bind="groomFather"></b><br><b data-bind="groomMother"></b></p>
+          </div>
+        </article>
+
+        <article class="person person--bride">
+          <figure class="portrait portrait--round img-reveal">
+            <div class="photo" data-photo="bride"><img alt="Aisyah"></div>
+          </figure>
+          <div class="person-info reveal">
+            <p class="role">The Bride</p>
+            <h3 data-bind="bride"></h3>
+            <p class="parents">Putri dari<br><b data-bind="brideFather"></b><br><b data-bind="brideMother"></b></p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ LOVE STORY ============ -->
+    <section id="story" class="sec sec--cream" data-nav="couple">
+      <div class="container">
+        <header class="sec-head reveal">
+          <h2>OUR LOVE STORY</h2>
+          <div class="ornament"></div>
+        </header>
+        <div class="timeline" id="timeline"></div>
+      </div>
+    </section>
+
+    <!-- ============ COUNTDOWN ============ -->
+    <section id="countdown" class="countdown" data-nav="event">
+      <div class="photo pbg" data-photo="countdown" data-parallax="0.1"><img alt="Pasangan pengantin"></div>
+      <div class="overlay overlay--dark"></div>
+      <div class="countdown-inner">
+        <header class="sec-head reveal">
+          <h2>SAVE THE DATE</h2>
+          <div class="ornament"></div>
+          <p class="lead" data-bind="dateLong"></p>
+        </header>
+        <div class="cd-grid reveal" role="timer" aria-live="off">
+          <div class="cd-cell"><span class="cd-num" id="cd-days">00</span><span class="cd-label">Days</span></div>
+          <div class="cd-cell"><span class="cd-num" id="cd-hours">00</span><span class="cd-label">Hours</span></div>
+          <div class="cd-cell"><span class="cd-num" id="cd-minutes">00</span><span class="cd-label">Minutes</span></div>
+          <div class="cd-cell"><span class="cd-num" id="cd-seconds">00</span><span class="cd-label">Seconds</span></div>
+        </div>
+        <p class="cd-note" id="cd-note" hidden></p>
+      </div>
+    </section>
+
+    <!-- ============ WEDDING EVENT ============ -->
+    <section id="event" class="sec sec--light" data-nav="event">
+      <div class="container">
+        <header class="sec-head reveal">
+          <h2>THE WEDDING EVENT</h2>
+          <div class="ornament"></div>
+        </header>
+
+        <div class="event-grid">
+          <article class="event-card reveal">
+            <h3>AKAD NIKAH</h3>
+            <p class="event-time" data-bind="akadTime"></p>
+            <p class="event-date" data-bind="dateLong"></p>
+          </article>
+          <article class="event-card reveal">
+            <h3>RECEPTION</h3>
+            <p class="event-time" data-bind="receptionTime"></p>
+            <p class="event-date" data-bind="dateLong"></p>
+          </article>
+        </div>
+
+        <div class="venue reveal">
+          <p class="venue-label">Lokasi</p>
+          <h3 class="venue-name" data-bind="venue"></h3>
+          <p class="venue-addr" data-bind="address"></p>
+          <a class="btn btn--dark" id="maps-btn" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            LIHAT LOKASI
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ GALLERY ============ -->
+    <section id="gallery" class="sec sec--dark" data-nav="gallery">
+      <div class="container">
+        <header class="sec-head reveal">
+          <h2>PHOTO GALLERY</h2>
+          <div class="ornament"></div>
+        </header>
+        <div class="gallery" id="gallery-grid"></div>
+      </div>
+    </section>
+
+    <!-- ============ VIDEO ============ -->
+    <section id="moment" class="sec sec--charcoal" data-nav="gallery">
+      <div class="container">
+        <header class="sec-head reveal">
+          <h2>OUR SONG</h2>
+          <div class="ornament"></div>
+        </header>
+        <div class="video-box img-reveal" id="video-box" aria-label="Lagu pernikahan pilihan">
+          <div id="bgm-player"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ RSVP ============ -->
+    <section id="rsvp" class="sec sec--light" data-nav="rsvp">
+      <div class="container narrow">
+        <header class="sec-head reveal">
+          <h2>RSVP</h2>
+          <div class="ornament"></div>
+          <p class="lead">Your presence means the world to us.</p>
+        </header>
+
+        <form id="rsvp-form" class="form reveal" novalidate>
+          <label class="field">
+            <span>Nama</span>
+            <input type="text" name="name" id="rsvp-name" maxlength="60" autocomplete="name" placeholder="Nama lengkap" required>
+          </label>
+
+          <fieldset class="field">
+            <legend>Konfirmasi Kehadiran</legend>
+            <div class="seg">
+              <label><input type="radio" name="attendance" value="hadir" checked><span>AKAN HADIR</span></label>
+              <label><input type="radio" name="attendance" value="tidak"><span>TIDAK DAPAT HADIR</span></label>
+            </div>
+          </fieldset>
+
+          <label class="field">
+            <span>Jumlah Tamu</span>
+            <select name="guests" id="rsvp-guests">
+              <option value="1">1 orang</option>
+              <option value="2">2 orang</option>
+              <option value="3">3 orang</option>
+              <option value="4">4 orang</option>
+              <option value="5">5 orang</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>Ucapan</span>
+            <textarea name="message" id="rsvp-message" rows="4" maxlength="280" placeholder="Tulis ucapan dan doa Anda"></textarea>
+          </label>
+
+          <p class="form-error" id="rsvp-error" role="alert" hidden></p>
+          <button class="btn btn--dark btn--block" type="submit">KIRIM KONFIRMASI</button>
+        </form>
+
+        <div class="rsvp-done" id="rsvp-done" hidden>
+          <div class="ornament"></div>
+          <h3 id="rsvp-done-title"></h3>
+          <p id="rsvp-done-text"></p>
+          <p class="demo-note" id="rsvp-demo-note">Mode demo: data tersimpan di browser ini saja.</p>
+          <button class="btn btn--dark" id="rsvp-again" type="button">UBAH KONFIRMASI</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WEDDING WISHES ============ -->
+    <section id="wishes" class="sec sec--dark" data-nav="rsvp">
+      <div class="container narrow">
+        <header class="sec-head reveal">
+          <h2>WEDDING WISHES</h2>
+          <div class="ornament"></div>
+        </header>
+
+        <form id="wish-form" class="form form--dark reveal" novalidate>
+          <label class="field">
+            <span>Nama</span>
+            <input type="text" name="name" id="wish-name" maxlength="40" placeholder="Nama Anda" required>
+          </label>
+          <label class="field">
+            <span>Pesan</span>
+            <textarea name="message" id="wish-message" rows="3" maxlength="280" placeholder="Tulis pesan untuk kedua mempelai" required></textarea>
+          </label>
+          <p class="form-error" id="wish-error" role="alert" hidden></p>
+          <button class="btn btn--solid btn--block" type="submit">KIRIM UCAPAN</button>
+        </form>
+
+        <div class="wish-list" id="wish-list" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- ============ DIGITAL GIFT ============ -->
+    <section id="gift" class="sec sec--light" data-nav="rsvp">
+      <div class="container narrow">
+        <header class="sec-head reveal">
+          <h2>DIGITAL GIFT</h2>
+          <div class="ornament"></div>
+          <p class="lead">Doa restu Anda adalah hadiah terindah. Bila berkenan berbagi tanda kasih, dapat melalui:</p>
+        </header>
+
+        <div class="gift-card reveal">
+          <p class="bank">QRIS</p>
+          <img class="qris-code" id="qris-image" alt="">
+          <p class="acc-holder" data-bind="giftQrisName"></p>
+        </div>
+
+        <div class="gift-address reveal">
+          <h3>Alamat Kado</h3>
+          <p class="recipient" data-bind="giftRecipient"></p>
+          <p class="addr" id="gift-addr" data-bind="giftAddress"></p>
+          <button class="btn btn--dark btn--sm" id="copy-addr" type="button">COPY ALAMAT</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CLOSING ============ -->
+    <section id="closing" class="closing" data-nav="rsvp">
+      <div class="photo pbg kb" data-photo="closing" data-parallax="0.1"><img alt="Tirmidzi dan Aisyah"></div>
+      <div class="overlay overlay--hero"></div>
+      <div class="closing-inner">
+        <p class="lead lead--light reveal" data-bind="closingText"></p>
+        <h2 class="closing-names reveal">
+          <span data-bind="groom"></span>
+          <em>&amp;</em>
+          <span data-bind="bride"></span>
+        </h2>
+        <p class="thanks reveal">With love and gratitude</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ NAVIGASI BAWAH ============ -->
+  <nav class="bottom-nav" id="bottom-nav" aria-label="Navigasi undangan">
+    <a href="#home" data-target="home" class="active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>
+      <span>Home</span>
+    </a>
+    <a href="#couple" data-target="couple">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5s-7-4.4-9.3-8.9A5.3 5.3 0 0 1 12 6a5.3 5.3 0 0 1 9.3 5.6C19 16.1 12 20.5 12 20.5z"/></svg>
+      <span>Couple</span>
+    </a>
+    <a href="#event" data-target="event">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+      <span>Event</span>
+    </a>
+    <a href="#gallery" data-target="gallery">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-5-8 9"/></svg>
+      <span>Gallery</span>
+    </a>
+    <a href="#rsvp" data-target="rsvp">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+      <span>RSVP</span>
+    </a>
+  </nav>
+
+  <!-- ============ TOMBOL MUSIK ============ -->
+  <button class="music-btn is-paused" id="music-btn" type="button" aria-label="Putar musik" aria-pressed="false">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/></svg>
+  </button>
+
+  <!-- ============ LIGHTBOX ============ -->
+  <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Galeri foto">
+    <button class="lb-btn lb-close" id="lb-close" type="button" aria-label="Tutup">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+    </button>
+    <button class="lb-btn lb-nav lb-prev" id="lb-prev" type="button" aria-label="Foto sebelumnya">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+    </button>
+    <figure class="lb-stage" id="lb-stage">
+      <img id="lb-img" alt="">
+      <div class="lb-fallback"><span id="lb-mono"></span></div>
+    </figure>
+    <button class="lb-btn lb-nav lb-next" id="lb-next" type="button" aria-label="Foto berikutnya">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+    </button>
+    <p class="lb-count"><span id="lb-i">1</span> / <span id="lb-n">1</span></p>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
